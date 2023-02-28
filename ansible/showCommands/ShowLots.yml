@@ -1,0 +1,23 @@
+---
+- name: Display running-config 
+  hosts: eos_device #Replace with address of the device or the file locaiton of the hosts file
+  gather_facts: no  #Tells Ansible not to gather facts about the device before running the play 
+  connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
+  tasks:
+    - name: Show running configuration
+      eos_command:
+        commands:
+          - show running-config #Shows the current running configuration of the switch
+          - show version    #Displays the software version, uptime, and hardware information
+          - show interfaces #Shows interface statistics and status information
+          - show ip interface   #Displays the IP address information for each interface
+          - show vlan   #Displays VLAN configuration and status information
+          - show ip route   #Shows the current routing table
+          - show mac address-table  #Displays the MAC address table
+          - show logging    #Shows the system log messages
+          - show bgp summary    #Displays the BGP status and summary information
+      register: output  #Registers the running-config to output to print in the below section
+
+    - name: Print output
+      debug:
+        var: output.stdout_lines
