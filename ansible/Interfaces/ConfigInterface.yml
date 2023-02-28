@@ -1,0 +1,14 @@
+- name: Create interface config for Arista EOS
+  hosts: eos-switch    #Replace with the name of the hosts section in the Ansible inventory file
+  vars_files:
+    - interfaces.yml    #The yaml file you created with the interface configurations
+  tasks:
+    - name: Render interface configuration
+      template:
+        src: interfaces.j2    #Specifies the jinja2 template to read
+        dest: /tmp/interfaces.cfg    #Specifies the destination/file name of the configuation file this will make
+    
+    - name: Configure interfaces
+      eos_config:
+        lines: "{{ lookup('file', '/tmp/interfaces.cfg') }}"    #Reads the configuration file that was above & applies the configuration
+                                   #/tmp/interfaces.cfg is the name/destination you specified in the above task

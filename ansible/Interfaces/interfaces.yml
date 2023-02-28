@@ -1,0 +1,19 @@
+interfaces:
+  - name: 
+    ip_address: 
+    subnet_mask: 
+    enabled: 
+    description: 
+
+  - name: 
+    ip_address: 
+    subnet_mask: 
+    enabled: 
+    description: 
+
+#Example interface config
+#  - name: Ethernet1
+#    ip_address: 10.0.0.1
+#    subnet_mask: 24
+#    enabled: true
+#    description: This is a sample interface
