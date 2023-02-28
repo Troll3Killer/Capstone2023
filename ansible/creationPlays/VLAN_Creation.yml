@@ -1,0 +1,21 @@
+---
+- name: Configure VLANs on Arista switch
+  hosts: switches   #Put the address of the host you want to connect to or the file location of your hosts/inventory file
+  gather_facts: no  #Tells Ansible not to gather facts about the device before running the play
+  connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
+  tasks:
+    - name: Create VLANs
+      eos_vlan:
+        vlan_id: "{{ item.id }}"    #Pulls the ID of the VLAN from the below with_items section
+        name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
+        state: present  #This will make the VLAN if it is not created already
+      with_items:
+        - { id: 10, name: "VLAN10" }    #Define the VLAN ID and name. EX: - { id: 10, name: "VLAN10" }
+
+    - name: Add VLANs to trunk ports
+      eos_interface:
+        name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
+        vlan_mode: trunk    #Set the mode of the VLAN. EX: Trunk, Access, Local
+        trunk_allowed_vlans: "{{ item.allowed_vlans }}" #Pulls the allowed VLANs from below with_items section
+      with_items:
+        - { name: "Ethernet1", allowed_vlans: "10,20" } #Define the interface and allowed VLANs. EX: - { name: "Ethernet1", allowed_vlans: "10,20" }

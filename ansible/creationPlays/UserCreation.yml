@@ -1,0 +1,21 @@
+---
+- name: Configure user on Arista EOS
+  hosts: eos    #Replace this with the address of the hosts you want to connect to or the file destinations of your hosts file/inventory file
+  become: yes
+  become_method: enable
+
+  tasks:
+  - name: Create user on Arista EOS
+    eos_user:
+      username: jdoe    #Replace with the username that you want your user to have
+      password: password123 #Replace with the password you want your user to have
+      role: network-admin   #Define the role you want your user to have
+      state: present    #The present value will make sure that the user is created if it doesn't exist
+
+#Additional/optional user parameters
+#  - name: Configure SSH key for user on Arista EOS
+#    eos_user:
+#      username: jdoe   #Username of the user you want
+#      sshkey: "{{ lookup('file', '/path/to/ssh_public_key.pub') }}"    #File path for you SSH public key for the user
+#      secret: <enable_secret>  #Used to configure the enable secret password for the user
+
