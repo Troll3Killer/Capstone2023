@@ -1,0 +1,15 @@
+- name: Query REST API and save response to file
+  hosts: localhost
+  tasks:
+    - name: Query REST API
+      uri:
+        url: http://172.100.100.3:8080/api/dcim/devices/
+        method: GET
+        headers:
+          Authorization: YOUR TOKEN HERE
+      register: api_response
+
+    - name: Save API response to file
+      copy:
+        content: "{{ api_response }}"
+        dest: inventory.json
