@@ -454,9 +454,9 @@ PLUGINS_CONFIG = {
     },
     "nautobot_chatops": {
 	"enable_slack": True,
-	"slack_api_token": "xoxb-4865642119797-4854065501415-RX9tKrlks2fPS2rWRd9D07Qa",
-	"slack_app_token": "xapp-1-A04RX6LRVA5-4871070212276-314709ea29d7015cf62a525eef5d5e4de4f164f636ff7ac3e9caf37c3eb8f1b9",
-	"slack_signing_secret": "1dcdf9e8a24e25276a7045b03b11f848",
+	"slack_api_token": "YOUR API TOKEN HERE",
+	"slack_app_token": "YOUR APP TOKEN HERE",
+	"slack_signing_secret": "YOUR SIGNING SECRET HERE",
 	"slack_slash_command_prefix": "/",
     }
 }
