@@ -1,0 +1,10 @@
+name,slug,status,region,tenant,asn,time_zone,contact_name,contact_phone
+Chicago-DC1,chicago-dc1,Active,Chicago-IL,Network-Team,65002,America/Chicago,Tyler Lee,7155550929
+Dallas-DC1,dallas-dc1,Active,Dallas-TX,Network-Team,65003,America/Chicago,Tyler Lee,7155550930
+Denver-DC1,denver-dc1,Active,Denver-CO,Network-Team,65004,America/Denver,Tyler Lee,7155550931
+Detroit-DC1,detroit-dc1,Active,Detroit-MI,Network-Team,65005,America/Indiana/Indianapolis,Tyler Lee,7155550932
+EauClaire-DC1,eauclaire-dc1,Active,EauClaire-WI,Network-Team,65006,America/Chicago,Tyler Lee,7155550933
+Madison-DC1,madison-dc1,Active,Madison-WI,Network-Team,65007,America/Chicago,Tyler Lee,7155550934
+Minneapolis-DC1,minneapolis-dc1,Active,Minneapolis-MN,Network-Team,65008,America/Chicago,Tyler Lee,7155550935
+NewYorkCity-DC1,newyorkcity-dc1,Active,NewYorkCity-NY,Network-Team,65009,America/Chicago,Tyler Lee,7155550936
+StPaul-DC1,stpaul-dc1,Active,StPaul-MN,Network-Team,65010,America/Chicago,Tyler Lee,7155550937
