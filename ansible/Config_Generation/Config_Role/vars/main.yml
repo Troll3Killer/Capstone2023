@@ -1,0 +1,45 @@
+---
+ansible_network_os: eos
+
+SPINE1:
+  hostname: SPINE1
+  mgmt_address: 172.100.100.101/24
+  vlan10_address: 10.10.10.2/24
+  vlan20_address: 10.20.20.2/24
+  vlan4094_address: 172.16.0.1/30
+  peer_address: 172.16.0.2
+
+
+
+SPINE2:
+  hostname: SPINE2
+  mgmt_address: 172.100.100.102/24
+  vlan10_address: 10.10.10.3/24
+  vlan20_address: 10.20.20.3/24
+  vlan4094_address: 172.16.0.1/30
+  peer_address: 172.16.0.1
+
+
+LEAF1:
+  hostsname: LEAF1
+  mgmt_address: 172.100.100.103/24
+  vlan4094_address: 172.16.0.1/30
+  peer_address: 172.16.0.2
+
+LEAF2:
+  hostsname: LEAF2
+  mgmt_address: 172.100.100.104/24
+  vlan4094_address: 172.16.0.2/30
+  peer_address: 172.16.0.1
+
+LEAF3:
+  hostsname: LEAF3
+  mgmt_address: 172.100.100.105/24
+  vlan4094_address: 172.16.0.1/30
+  peer_address: 172.16.0.2
+
+LEAF4:
+  hostsname: LEAF4
+  mgmt_address: 172.100.100.106/24
+  vlan4094_address: 172.16.0.2/30
+  peer_address: 172.16.0.1
