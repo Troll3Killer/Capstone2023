@@ -1,0 +1,5 @@
+---
+- name: Render Template
+  template:
+    src: templates/{{ template }}
+    dest: ~/filepath/{{ hostname }}

@@ -1,0 +1,12 @@
+---
+- name: autogenerate configs
+  hosts: all
+  become: yes
+  become_method: enable
+  connection: network_cli
+  gather_facts: no
+  
+  tasks:
+  - name: create configs
+    import_role:
+      name: Config_Role
