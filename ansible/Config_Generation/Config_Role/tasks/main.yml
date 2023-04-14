@@ -2,4 +2,4 @@
 - name: Render Template
   template:
     src: templates/{{ template }}
-    dest: ~/filepath/{{ hostname }}
+    dest: ~/Capstone2023/renderedconfigs/{{ hostname }}

@@ -9,8 +9,6 @@ SPINE1:
   vlan4094_address: 172.16.0.1/30
   peer_address: 172.16.0.2
 
-
-
 SPINE2:
   hostname: SPINE2
   mgmt_address: 172.100.100.102/24
@@ -18,7 +16,6 @@ SPINE2:
   vlan20_address: 10.20.20.3/24
   vlan4094_address: 172.16.0.1/30
   peer_address: 172.16.0.1
-
 
 LEAF1:
   hostsname: LEAF1
