@@ -10,7 +10,7 @@
 
   tasks:
     - name: Create ACL
-      arista.eos.eos_acl:
+      eos_acl:
         name: "{{ acl_name }}"  #Pulls the name you defined above
         type: standard  #Specifies that this is either a standard or extended ACL
         rules: "{{ acl_rules }}"    #Pulls the rules you definied for your ACL above
