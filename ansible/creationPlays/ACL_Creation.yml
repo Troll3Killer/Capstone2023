@@ -1,15 +1,13 @@
 ---
 - name: Create ACL on Arista EOS
-  hosts: eos_switch #Put the address of the host you want to connect to or the file location of your hosts/inventory file
+  hosts: LEAF1 #Put the address of the host you want to connect to or the file location of your hosts/inventory file
   gather_facts: no  #Tells Ansible not to gather facts about the device before running the play
   connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
   vars:
-    acl_name: "my_acl"  #Put the name of your ACL inside of the quotations. EX: "List10"
+    acl_name: "TestACL"  #Put the name of your ACL inside of the quotations. EX: "List10"
     acl_rules:  
       - rule: "10 permit tcp any any eq 80" #Put the rule/s you want your ACL to have inside of quotations. EX: "10 permit tcp any any eq 80"
-      - rule: "fill"
-      - rule: "fill"
-      - rule: "fill"
+
   tasks:
     - name: Create ACL
       eos_acl:
