@@ -10,12 +10,12 @@
         name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
         state: present  #This will make the VLAN if it is not created already
       with_items:
-        - { id: 10, name: "VLAN10" }    #Define the VLAN ID and name. EX: - { id: 10, name: "VLAN10" }
+        - { id: 60, name: "VLAN60" }    #Define the VLAN ID and name. EX: - { id: 10, name: "VLAN10" }
 
-    - name: Add VLANs to trunk ports
-      eos_interface:
-        name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
-        vlan_mode: trunk    #Set the mode of the VLAN. EX: Trunk, Access, Local
-        trunk_allowed_vlans: "{{ item.allowed_vlans }}" #Pulls the allowed VLANs from below with_items section
-      with_items:
-        - { name: "Ethernet1", allowed_vlans: "10,20" } #Define the interface and allowed VLANs. EX: - { name: "Ethernet1", allowed_vlans: "10,20" }
+    #- name: Add VLANs to trunk ports
+    #  eos_interface:
+    #    name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
+    #    vlan_mode: Access    #Set the mode of the VLAN. EX: Trunk, Access, Local
+    #    trunk_allowed_vlans: "{{ item.allowed_vlans }}" #Pulls the allowed VLANs from below with_items section
+    #  with_items:
+    #    - { name: "Ethernet1", allowed_vlans: "50,60" } #Define the interface and allowed VLANs. EX: - { name: "Ethernet1", allowed_vlans: "10,20" }
