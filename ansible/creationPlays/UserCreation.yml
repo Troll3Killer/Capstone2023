@@ -7,9 +7,9 @@
   tasks:
   - name: Create user on Arista EOS
     eos_user:
-      username: jdoe    #Replace with the username that you want your user to have
-      password: password123 #Replace with the password you want your user to have
-      role: network-admin   #Define the role you want your user to have
+      name: jdoe    #Replace with the username that you want your user to have
+      configured_password: password123 #Replace with the password you want your user to have
+      privilege: 15
       state: present    #The present value will make sure that the user is created if it doesn't exist
 
 #Additional/optional user parameters
