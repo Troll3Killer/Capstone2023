@@ -1,8 +1,8 @@
 ---
 - name: Configure user on Arista EOS
   hosts: eos    #Replace this with the address of the hosts you want to connect to or the file destinations of your hosts file/inventory file
-  become: yes
-  become_method: enable
+  gather_facts: no
+  connection: network_cli
 
   tasks:
   - name: Create user on Arista EOS
