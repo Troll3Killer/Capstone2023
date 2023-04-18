@@ -1,6 +1,6 @@
 ---
 - name: Configure VLANs on Arista switch
-  hosts: switches   #Put the address of the host you want to connect to or the file location of your hosts/inventory file
+  hosts: LEAF1   #Put the address of the host you want to connect to or the file location of your hosts/inventory file
   gather_facts: no  #Tells Ansible not to gather facts about the device before running the play
   connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
   tasks:
