@@ -1,6 +1,6 @@
 ---
 - name: Configure user on Arista EOS
-  hosts: eos    #Replace this with the address of the hosts you want to connect to or the file destinations of your hosts file/inventory file
+  hosts: LEAF1    #Replace this with the address of the hosts you want to connect to or the file destinations of your hosts file/inventory file
   gather_facts: no
   connection: network_cli
 
