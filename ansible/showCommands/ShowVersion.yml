@@ -1,6 +1,6 @@
 ---
 - name: Display running-config 
-  hosts: eos_device #Replace with address of the device or the file locaiton of the hosts file
+  hosts: LEAF1 #Replace with address of the device or the file locaiton of the hosts file
   gather_facts: no  #Tells Ansible not to gather facts about the device before running the play 
   connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
   tasks:
