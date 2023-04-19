@@ -5,7 +5,7 @@
   connection: network_cli   #Tells Ansible to use the CLI of Arista EOS
   tasks:
     - name: Create VLANs
-      eos_vlan:
+      eos_vlans:
         vlan_id: "{{ item.id }}"    #Pulls the ID of the VLAN from the below with_items section
         name: "{{ item.name }}" #Pulls the name of the interface from the below with_items section
         state: present  #This will make the VLAN if it is not created already
