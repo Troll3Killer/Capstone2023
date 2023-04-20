@@ -29,7 +29,7 @@
     set_fact:
       containerlab_config_parsed: "{{ containerlab_config['content'] | b64decode | from_yaml }}"
 
- - name: Add new Arista container switches to existing configuration
+  - name: Add new Arista container switches to existing configuration
     set_fact:
       updated_containerlab_config: "{{ containerlab_config_parsed | combine({'topology': {'nodes': new_switches}}, recursive=True) }}"
     vars:
