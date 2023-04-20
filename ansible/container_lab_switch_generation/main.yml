@@ -87,7 +87,7 @@
     set_fact:
       updated_containerlab_config: "{{ containerlab_config_parsed | combine({'topology': {'nodes': new_switches}}, recursive=True) }}"
     vars:
-      new_switches: "{{ containerlab_config_parsed.topology.nodes | default({}) | combine(dict(new_arista_switches | zip(new_arista_switches))) }}"
+      new_switches: "{{ containerlab_config_parsed.topology.nodes | default({}) | combine(dict(new_arista_switches | map(attribute='name') | zip(new_arista_switches | map('combine', {'name': omit})))) }}"
 
   - name: Write updated containerlab configuration
     copy:
