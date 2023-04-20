@@ -3,48 +3,48 @@
   hosts: localhost
   gather_facts: no
   tasks:
-    - name: Ensure containerlab is installed
-      ansible.builtin.package:
-        name: containerlab
-        state: present
+  - name: Ensure containerlab is installed
+    ansible.builtin.package:
+      name: containerlab
+      state: present
 
-    - name: Define new Arista container switches
-      set_fact:
-        new_arista_switches:
-          - name: Chicago_LEAF1
-            mgmt_ip: 172.100.100.50/24
-          - name: Chicago_LEAF2
-            mgmt_ip: 172.100.100.51/24
-          - name: Chicago_LEAF3
-            mgmt_ip: 172.100.100.52/24
-          - name: Chicago_LEAF4
-            mgmt_ip: 172.100.100.53/24
-          - name: Chicago_SPINE1
-            mgmt_ip: 172.100.100.54/24
-          - name: Chicago_SPINE2
-            mgmt_ip: 172.100.100.55/24
-          # Add more new Arista switches if needed
+  - name: Define new Arista container switches
+    set_fact:
+      new_arista_switches:
+        - name: Chicago_LEAF1
+          mgmt_ip: 172.100.100.50/24
+        - name: Chicago_LEAF2
+          mgmt_ip: 172.100.100.51/24
+        - name: Chicago_LEAF3
+          mgmt_ip: 172.100.100.52/24
+        - name: Chicago_LEAF4
+          mgmt_ip: 172.100.100.53/24
+        - name: Chicago_SPINE1
+          mgmt_ip: 172.100.100.54/24
+        - name: Chicago_SPINE2
+          mgmt_ip: 172.100.100.55/24
+        # Add more new Arista switches if needed
 
-    - name: Read existing containerlab configuration
-      ansible.builtin.slurp:
-        src: ~/containerlab/topologies/LSLS/LSLS.yaml
-      register: containerlab_config
+  - name: Read existing containerlab configuration
+    ansible.builtin.slurp:
+      src: ~/containerlab/topologies/LSLS/LSLS.yaml
+    register: containerlab_config
 
-    - name: Parse containerlab configuration
-      set_fact:
-        containerlab_config_parsed: "{{ containerlab_config['content'] | b64decode | from_yaml }}"
+  - name: Parse containerlab configuration
+    set_fact:
+      containerlab_config_parsed: "{{ containerlab_config['content'] | b64decode | from_yaml }}"
 
-    - name: Add new Arista container switches to existing configuration
-      set_fact:
-        updated_containerlab_config: "{{ containerlab_config_parsed | combine({'topology': {'nodes': new_switches}}, recursive=True) }}"
-      vars:
-        new_switches: "{{ containerlab_config_parsed.topology.nodes | default({}) | combine(new_arista_switches | items2dict(key_name='name', value_name=None)) }}"
+  - name: Add new Arista container switches to existing configuration
+    set_fact:
+      updated_containerlab_config: "{{ containerlab_config_parsed | combine({'topology': {'nodes': new_switches}}, recursive=True) }}"
+    vars:
+      new_switches: "{{ containerlab_config_parsed.topology.nodes | default({}) | combine(new_arista_switches | items2dict(key_name='name', value_name=None)) }}"
 
-    - name: Write updated containerlab configuration
-      ansible.builtin.copy:
-        content: "{{ updated_containerlab_config | to_nice_yaml }}"
-        dest: updated_containerlab.yml
+  - name: Write updated containerlab configuration
+    ansible.builtin.copy:
+      content: "{{ updated_containerlab_config | to_nice_yaml }}"
+      dest: updated_containerlab.yml
 
-    - name: Apply updated containerlab configuration
-      ansible.builtin.command:
-        cmd: containerlab deploy -t updated_containerlab.yml -l
+  - name: Apply updated containerlab configuration
+    ansible.builtin.command:
+      cmd: containerlab deploy -t updated_containerlab.yml -l
