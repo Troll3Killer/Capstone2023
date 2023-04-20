@@ -22,7 +22,7 @@
 
   - name: Read existing containerlab configuration
     slurp:
-      src: ~/containerlab/topologies/LSLS/LSLS.yaml
+      src: ~/containerlab/topologies/L2LS/L2LS.yaml
     register: containerlab_config
 
   - name: Parse containerlab configuration
