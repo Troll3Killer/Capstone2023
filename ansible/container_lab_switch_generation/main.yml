@@ -3,11 +3,6 @@
   hosts: localhost
   gather_facts: no
   tasks:
-  - name: Ensure containerlab is installed
-    ansible.builtin.package:
-      name: containerlab
-      state: present
-
   - name: Define new Arista container switches
     set_fact:
       new_arista_switches:
