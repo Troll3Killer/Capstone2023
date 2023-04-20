@@ -92,8 +92,8 @@
   - name: Write updated containerlab configuration
     copy:
       content: "{{ updated_containerlab_config | to_nice_yaml }}"
-      dest: updated_containerlab.yml
+      dest: ~/containerlab/topologies/L2LS/updated_containerlab.yml
 
   - name: Apply updated containerlab configuration
     command:
-      cmd: sudo containerlab deploy -t updated_containerlab.yml
+      cmd: sudo containerlab deploy -t ~/containerlab/topologies/L2LS/updated_containerlab.yml --reconfigure
