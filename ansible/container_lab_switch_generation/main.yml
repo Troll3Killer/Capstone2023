@@ -21,7 +21,7 @@
         # Add more new Arista switches if needed
 
   - name: Read existing containerlab configuration
-    ansible.builtin.slurp:
+    slurp:
       src: ~/containerlab/topologies/LSLS/LSLS.yaml
     register: containerlab_config
 
@@ -36,10 +36,10 @@
       new_switches: "{{ containerlab_config_parsed.topology.nodes | default({}) | combine(new_arista_switches | items2dict(key_name='name', value_name=None)) }}"
 
   - name: Write updated containerlab configuration
-    ansible.builtin.copy:
+    copy:
       content: "{{ updated_containerlab_config | to_nice_yaml }}"
       dest: updated_containerlab.yml
 
   - name: Apply updated containerlab configuration
-    ansible.builtin.command:
+    command:
       cmd: containerlab deploy -t updated_containerlab.yml -l
