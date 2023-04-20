@@ -25,7 +25,7 @@
           mgmt_ipv4: 172.100.100.122
           ports:
           - '22012:22'
-          - 80012:80
+          - 8012:80
           - 44312:443
           startup-config: ~/containerlab/topologies/L2LS/configs/LEAF2.cfg
         - name: Chicago_LEAF3
