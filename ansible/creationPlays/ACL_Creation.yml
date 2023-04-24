@@ -8,15 +8,15 @@
     - name: Create ACLs
       eos_acls:
         config:
-        - afi: ipv4
+        - afi: ipv4   #Specify ipv4 or ipv6 for the address family that you are creating
           acls:
-          - name: TestACL
+          - name: TestACL   #Give your ACL a fun and useful name here
             aces:
-            - sequence: 10
-              grant: permit
-              protocol: icmp
-              source:
+            - sequence: 10    #Give you ACE entry a sequence number
+              grant: permit   #Permit or deny traffic
+              protocol: icmp  #Specify the protocol for the ACE
+              source:         #Specify the source address
                 any: true
-              destination:
+              destination:    #Specify the destination address
                 any: true
-        state: merged
+        state: merged         #Specify the state of the ACL
