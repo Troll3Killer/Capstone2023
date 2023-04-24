@@ -1,0 +1,14 @@
+---
+- name: Configure Arista interfaces
+  hosts: LEAF1
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Configure Arita switchports with IPs
+      arista.eos.eos_l3_interfaces:
+        config:
+	      - name: Ethernet1
+	        ipv4:                   #Change to ipv6 if you want a v6 address
+	        - address: x.x.x.x/x    #Fill in IP address/subnet
+	      state: merged
