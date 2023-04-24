@@ -1,6 +1,6 @@
 ---
 - name: Configure Arista interface to allow VLANs
-  hosts: LEAF1
+  hosts: LEAF1    #Define the name of the host you want to confiugre
   gather_facts: no
   connection: network_cli
 
@@ -8,10 +8,10 @@
     - name: Configure Arita switchports with VLANs
       arista.eos.eos_l2_interfaces:
         config:
-        #- name: Ethernet1
-          #mode: trunk
-          #trunk:
-           # native_vlan: 10
+        #- name: Ethernet1    #Specify the name of the interface you want to create a configuration for
+          #mode: trunk        #Specify trunk or access mode for the port
+          #trunk:             #If you spcify your port mode as access this should be access, if your port is in trunk mode this should be trunk
+           # native_vlan: 10  #Specify the native VLAN you want the port to use
         - name: Ethernet2
           mode: access
           access:
