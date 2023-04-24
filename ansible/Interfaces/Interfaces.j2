@@ -1,5 +1,0 @@
-{% for interface in interfaces %}   ##For each interface in the interfaces.yml file
-interface {{ interface.name }}    ##Grabs the name of the interface
-  ip address {{ interface.ip_address }}/{{ interface.subnet_mask }}    ##Grabs the IP and Subnet of the interface
-  description {{ interface.description }}    ##Grabs the description of the interface
-{% endfor %}
