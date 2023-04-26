@@ -29,4 +29,4 @@
     - name: Save response to a file
       copy:
         content: "{{ nautobot_devices }}"
-        dest: inventory.json
+        dest: gql_inventory.json
