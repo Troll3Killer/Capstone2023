@@ -1,0 +1,32 @@
+- name: Query devices from Nautobot
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Get device data from Nautobot
+      uri:
+        url: "http://172.100.100.3:8080/api/graphql/"
+        method: POST
+        headers:
+          Content-Type: "application/json"
+          Authorization: Token fcb1cc6ec046c03d168251ffee325dd701d1f8ff
+        body_format: json
+        body:
+          query: |
+            {
+              devices {
+                name
+                primary_ip4 {
+                  address
+                }
+              }
+            }
+        #return_content: yes
+        #status_code: 200
+      register: nautobot_devices
+
+    - name: Save response to a file
+      copy:
+        content: "{{ nautobot_devices }}"
+        dest: inventory.json
