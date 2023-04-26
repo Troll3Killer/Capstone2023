@@ -1,7 +1,7 @@
 import json
 
 #Opens the JSON file with the output from the dynamic-inventory and loads it into data
-with open('gql_Inventory.json') as f:
+with open('gql_inventory.json') as f:
     data = json.load(f)
 
 inventory_output = ''
