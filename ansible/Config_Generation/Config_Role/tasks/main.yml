@@ -2,4 +2,4 @@
 - name: Render Template
   template:
     src: templates/{{ template }}
-    dest: /Capstone2023/renderedconfigs/menomonie-dc1/{{ hostname }}.cfg
+    dest: ../../renderedconfigs/menomonie-dc1/{{ hostname }}.cfg
