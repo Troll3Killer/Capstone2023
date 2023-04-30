@@ -18,25 +18,25 @@ SPINE2:
   peer_address: 172.16.0.1
 
 LEAF1:
-  hostsname: LEAF1
+  hostname: LEAF1
   mgmt_address: 172.100.100.103/24
   vlan4094_address: 172.16.0.1/30
   peer_address: 172.16.0.2
 
 LEAF2:
-  hostsname: LEAF2
+  hostname: LEAF2
   mgmt_address: 172.100.100.104/24
   vlan4094_address: 172.16.0.2/30
   peer_address: 172.16.0.1
 
 LEAF3:
-  hostsname: LEAF3
+  hostname: LEAF3
   mgmt_address: 172.100.100.105/24
   vlan4094_address: 172.16.0.1/30
   peer_address: 172.16.0.2
 
 LEAF4:
-  hostsname: LEAF4
+  hostname: LEAF4
   mgmt_address: 172.100.100.106/24
   vlan4094_address: 172.16.0.2/30
   peer_address: 172.16.0.1
