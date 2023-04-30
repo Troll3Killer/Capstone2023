@@ -1,5 +1,5 @@
 ---
-- name: Render Template
+- name: Render template
   template:
     src: templates/{{ template }}
     dest: ../../renderedconfigs/menomonie-dc1/{{ hostname }}.cfg
