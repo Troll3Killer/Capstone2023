@@ -1,6 +1,6 @@
 ---
 - name: autogenerate configs
-  hosts: localhost
+  hosts: all
   become: yes
   become_method: enable
   connection: network_cli
