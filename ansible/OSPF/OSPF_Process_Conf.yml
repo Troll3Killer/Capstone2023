@@ -1,0 +1,19 @@
+---
+- name: Configure OSPFv3 on Arista Switches
+  hosts: LEAF1
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Create OSPF process on device
+      arista.eos.eos_ospfv3:
+        config:
+          processes:
+            - areas:
+              - area_id: "1.1.1.1"    #Replace with your desired area id, keep the quotations
+                authentication:           #This ecryptoin section was taken from the module documentation for a proof of concept
+                  spi: 43             #Specify your Security Paramater Index value
+                  algorithm: "md5"    #Choose the algorithm type that you want
+                  encrypt_key: False  #When this option is false the below passphrase is encrypted and not displayed like below
+                  passphrase: "7hl8FV3lZ6H1mAKpjL47hQ=="  #Passphrase for the authentication process
+              vrf: "TestProcess"      #This is the you want to give your OSPF process
