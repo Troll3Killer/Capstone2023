@@ -1,0 +1,20 @@
+---
+- name: Configure OSPF on interfaces 
+  hosts: LEAF1
+  gather_facts: no
+  connection: network_cli
+
+  tasks:
+    - name: Configure interfaces for OSPF
+      arista.eos.eos_ospf_interfaces:
+        config:
+          - name: "Vlan1"             #Specify your interface (Vlan1, Ethernet1, etc)
+            address_family:
+              - afi: "ipv4"           #Specify the address family that you want to configure (ipv4 or ipv6)
+                area:
+                  area_id: "1.1.1.1"  #Specify the area-id of your process
+                cost: 500             #Specify your link cost
+                dead_interval: 60     #Specify your dead timer interval 
+                hello_interval: 30    #Specify your hello timer interval
+                mtu_ignore: True      #Specify True if you want to ignore the check for database description packets
+        state: merged                 #Set your state (merged, replaced, overridden, deleted, gathered, parsed, rendered)
