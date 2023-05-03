@@ -15,10 +15,10 @@
         - name: Ethernet2
           mode: access
           access:
-            vlan: 10
+            vlan: 20
         - name: Ethernet1
           mode: trunk
           trunk:
-            native_vlan: 10
+            native_vlan: 20
             trunk_allowed_vlans: 5
         state: merged
