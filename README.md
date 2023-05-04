@@ -5,9 +5,29 @@ Using Zabbix, we are able to query the devices for key pieces of information, wi
 
 
 ## Table of Contents
-X
-## Features
-X
+[Google Cloud](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#google-cloud) 
+
+[Plugins](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#plugins)
+
+[Slack Tokens](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#obtaining-slack-tokens)
+
+[Connecting GitHub to Nautobot](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#connecting-github-to-nautobot)
+
+[Modifying Permissions](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#modify-permissions)
+
+[Installing the Nautobot Server](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#installing-the-nautobot-server)
+
+[Installing the Zabbix Server](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#installing-the-zabbix-server)
+
+[Setting Up Devices for Telementry/Zabbix Use](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#setting-up-devices-for-telementryzabbix-use)
+
+[Ansible](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#ansible)
+
+[Creating Docker Container](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#creating-docker-container)
+
+[Running the Files](https://github.com/KadeSherry/Capstone2023/edit/main/README.md#running-the-files)
+
+
 ## Getting Started (What we did)
 
 ### Google Cloud
@@ -340,6 +360,103 @@ After all of this you should have a host’s screen that looks like this:
  ![image](https://user-images.githubusercontent.com/45835613/231945825-1156b1fc-90fd-494c-83ad-128a9d55831a.png)
 
 
-### Creating Nautobot Collection with Ansible
+### Ansible
+## Creating Docker Container
+This section goes over the process of creating a Docker container for rining the Ansible Dynamic Inventory and Playbooks.
+This is so you can have your Ansible materials segmented from the container that Nautobot is running on, but still be able to query Nautobot for the required information like hostname and IP address.
 
-### Next we will be creating Ansible Templates.
+- Install Docker onto your machine with the below commands, starting by updating the machine you’re putting Docker on.
+```bash
+sudo apt-get update
+sudo apt install docker.io -y
+```
+- To verify that Docker was installed run the command “docker -version”. If Docker installed successfully you will see the Docker version in the command line.
+![image](https://user-images.githubusercontent.com/45835613/236310212-a407870c-0106-4135-8828-9fe839cafd13.png)
+- Next, you want to create a Docker container image for building your Docker container. The below code is what we included in our file but if you have other requirements that we did not include you can add them to the file as well:
+```bash
+FROM ubuntu:18.04
+	
+ENV DEBIAN_FRONTEND=noninteractive
+	
+RUN apt-get update && \
+apt-get install python3-pip -y && \
+pip3 install --upgrade pip && \
+pip3 install --upgrade virtualenv && \
+pip3 install ansible && \
+ansible-galaxy collection install networktocode.nautobot
+```
+- Next, build the image for Docker using the directories from your Docker file. Use the below command to build the image.
+```bash
+docker build -t ansible:host 
+```
+- Then run the Docker container you created in interactive mode by entering the below command:
+```bash
+docker run -it ansible
+```
+- To switch to the Ansible container enter the below command. Replace the “ID” field with your Docker container’s ID or assigned name to switch to it:
+```bash
+sudo docker exec -it “ID” /bin/bash
+```
+Note: If you have issues creating a Docker container with the Docker file please see the below method to manually create a container.
+- To create a Docker container manually use the below command:
+```bash
+Docker run -it --name Ansible ubuntu /bin/bash
+```
+- To install the necessary requirements for Ansible run the below commands:
+```bash
+apt-get update
+apt-get install python3-pip -y
+pip3 install --upgrade pip
+pip3 install --upgrade virtualenv
+pip3 install ansible
+ansible-galaxy collection install networktocode.nautobot
+apt install vim
+apt install sudo
+```
+
+## Running the Files
+To run the included file, use the following commands:
+- Switch to the Ansible container that you created previously:
+```bash
+sudo docker exec -it ae03d02f6e81 /bin/bash
+```
+![image](https://user-images.githubusercontent.com/45835613/236314773-1c1ba4ba-9188-4a8f-86af-ccdeb8c442fd.png)
+
+- Change to the directory that contains your Ansible configuration file to run your playbooks from:
+```bash
+cd Capstone2023/AnsibleCore/
+```
+![image](https://user-images.githubusercontent.com/45835613/236314732-1c14f69a-acb3-451a-827e-11970ef1b439.png)
+
+- First, run the get_GQL_Inv.yml file to query Nautobot GraphQL for device information like hostname and IP address:
+```bash
+ansible-playbook GQL_Inv/get_GQL_Inv.yml
+```
+![image](https://user-images.githubusercontent.com/45835613/236314696-8bb15f71-cf3b-4cff-a788-ad93ba706dc4.png)
+
+- Change to the directory with your device query, outputted device information file, and Python formatting file:
+```bash
+cd GQL_Inv/
+```
+![image](https://user-images.githubusercontent.com/45835613/236314638-d3736197-7193-4eb3-ba27-883a045987fc.png)
+
+- After you have changed directories run the python file extract_GQL_IP.py. This file will take the JSON output from the previous command and format it into an inventory.ini file for Ansible to use:
+```bash
+python3 extract_GQL_IP.py
+```
+![image](https://user-images.githubusercontent.com/45835613/236314604-a4a92eac-9eab-4d68-b279-c826b21f5ed2.png)
+
+-	Now that you have queried Nautobot GraphQL for device information and it has been formatted into a usable inventory by Ansible use the below commands. These will change you back to the directory with your Ansible configuration file where you can run your plays from.
+```bash
+cd ..
+ansible-playbook -u admin -k playbook.yml
+```
+![image](https://user-images.githubusercontent.com/45835613/236314561-fc9141b3-cc97-4a59-9ea5-c620a63efb96.png)
+
+Note: Replace “playbook.yml” with the file path of the playbooks that you have created like in the screenshot provided. Additionally, with the ansible-playbook command -u specifies the username to log into the device, and -k prompts the user for a password to log into the device.
+
+
+
+
+
+
